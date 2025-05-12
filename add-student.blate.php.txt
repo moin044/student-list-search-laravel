@@ -1,0 +1,12 @@
+
+
+<div>
+    <h2>Add Student</h2>
+    <form action="" method="post">
+        @csrf
+        <input type="text" name="name" placeholder="Enter Your Name"><br><br>
+        <input type="email" name="email" placeholder="Enter Your email"><br><br>
+        <input type="password" name="password" placeholder="enter your password"><br><br>
+        <button>Add Student</button>
+    </form>
+</div>

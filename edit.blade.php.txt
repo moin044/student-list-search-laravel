@@ -1,0 +1,12 @@
+<div>
+    <h2>Edit User</h2>
+   <form action="/edit/{{ $edit->id }}" method="post">
+    @csrf
+    <input type="hidden" name="_method" value="put">
+    <input type="text" name="name" value="{{ $edit->name }}"><br><br>
+    <input type="text" name="email" value="{{ $edit->email }}"><br><br>
+    <input type="text" name="password" value="{{ $edit->password }}"><br><br>
+    <button type="submit">Update</button>
+    <a href="/list">Cancel</a>
+   </form>
+</div>

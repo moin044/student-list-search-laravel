@@ -1,0 +1,58 @@
+<div>
+
+    <button><a href="/add">Add Student</a></button>
+    <h2>All Student List</h2>
+    <form action="search" method="get">
+        <input type="text" name="search" placeholder="search with fast latter">
+        <button>Search</button>
+    </form>
+
+    <form action="multidelete" method="post">
+        @csrf
+        <button>Delete</button>
+    <table border="1">
+        
+        <tr>
+            <th>Select</th>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Password</th>
+            <th>Created Date</th>
+            <th>Updated Date</th>
+            <th>Oparation</th>
+        </tr>
+        @foreach ($list as  $list2 )
+        <tr>
+            <td>
+                <input type="checkbox" name="ids[]" value="{{ $list2->id }}">
+            </td>
+            <td>{{$list2->id}}</td>
+            <td>{{$list2->name}}</td>
+            <td>{{$list2->email}}</td>
+            <td>{{$list2->password}}</td>
+            <td>{{$list2->created_at}}</td>
+            <td>{{$list2->updated_at}}</td>
+            <td>
+                <a href="{{'delete/'.$list2->id}}">Delete</a>
+                <a href="{{'edit/'.$list2->id}}">Edit</a>
+            </td>
+        </tr>
+            
+        @endforeach
+    </table>
+    </form>
+    <br>
+    {{-- {{ $list->links() }} --}}
+   
+
+</div>
+
+<style>
+    .w-5.h-5{
+        width: 15px;
+    }
+    button a{
+        text-decoration: none;
+    }
+</style>

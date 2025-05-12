@@ -1,0 +1,76 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use App\Models\Student;
+use Illuminate\Support\Facades\Redirect;
+
+class UserController extends Controller
+{
+
+//Student add form control
+    function add(Request $request){
+        $studentadd = new Student();
+        $studentadd->name=$request->name;
+        $studentadd->email=$request->email;
+        $studentadd->password=$request->password;
+        $studentadd->save();
+        if($studentadd){
+            return redirect("list");
+        }else{
+            return "Oparation Failed";
+        }
+    }
+// Student view section
+
+    function sviewfunction(){
+       $studentv = Student::paginate(5);
+       return view("list-stedent",["list"=>$studentv]);
+        
+    }
+
+//Student Delete section
+
+    function delete($id){
+        $studentdel = Student::destroy($id);
+        if($studentdel){
+            return redirect("list");
+        }
+    }
+
+    function edit($id){
+        $studentedit = Student::find($id);
+        return view("edit",["edit"=>$studentedit]);
+    }
+
+    function editupdate(Request $request,$id){
+        $studentupdate = Student::find($id);
+        $studentupdate->name=$request->name;
+        $studentupdate->email=$request->email;
+        $studentupdate->password=$request->password;
+        if($studentupdate->save()){
+            return Redirect("list");
+        }else{
+            return "Update Failed";
+        }
+
+    }
+
+    function search(Request $request){
+        $studentdata = Student::where("name","like","%$request->search%")->get();
+        return view("list-stedent",["list"=>$studentdata]);
+    }
+
+    function multidelete(Request $request){
+        $deletestudent = Student::destroy($request->ids);
+        if($deletestudent){
+            return redirect("list");
+
+        }else{
+            return "data not delete";
+        }
+
+    }
+
+}
